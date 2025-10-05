@@ -3,7 +3,7 @@ class_name Platform
 extends Node2D
 
 const TILE_WIDTH: int = 128
-const SPRITE: Texture2D = preload("res://assets/tiles-a.png")
+const SPRITE: Texture2D = preload("res://assets/tiles-b.png")
 
 ## How many tiles wide is the platform?
 @export_range(1, 20, 1, "suffix:tiles") var width: int = 3:

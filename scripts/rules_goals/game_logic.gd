@@ -72,7 +72,7 @@ func _ready():
 		Global.flag_raised.connect(_on_flag_raised)
 
 	if time_limit > 0:
-		Global.setup_timer(time_limit)
+		Global.setup_texturetimer(time_limit)
 
 	_set_lives(lives)
 

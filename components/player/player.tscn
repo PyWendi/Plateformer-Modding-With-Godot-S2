@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://8st4scqt06l8"]
+[gd_scene load_steps=7 format=3 uid="uid://8st4scqt06l8"]
 
 [ext_resource type="Script" uid="uid://umb21eb2y1oj" path="res://scripts/player.gd" id="1_w3ms2"]
-[ext_resource type="SpriteFrames" uid="uid://bo581k1esb50n" path="res://components/player/spriteframes-red.tres" id="2_msaml"]
+[ext_resource type="SpriteFrames" uid="uid://cp70hdrx2lc0o" path="res://components/player/spriteframes-green.tres" id="2_kfe3d"]
+[ext_resource type="AudioStream" uid="uid://c2ee72vmewmey" path="res://assets/audio/SFX/Mob squashed.wav" id="3_ph1f6"]
+[ext_resource type="AudioStream" uid="uid://dylw4rcw2bbyu" path="res://assets/audio/SFX/coin.wav" id="4_wa6cj"]
+[ext_resource type="AudioStream" uid="uid://cc0nlx12xfchf" path="res://assets/audio/SFX/jump.wav" id="5_mpawu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7x5a4"]
 radius = 31.0
@@ -13,6 +16,7 @@ collision_mask = 5
 floor_constant_speed = true
 floor_snap_length = 32.0
 script = ExtResource("1_w3ms2")
+jump_velocity = -1100.0
 
 [node name="DoubleJumpParticles" type="CPUParticles2D" parent="."]
 unique_name_in_owner = true
@@ -32,10 +36,23 @@ color = Color(1, 1, 0, 1)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(0, -64)
-sprite_frames = ExtResource("2_msaml")
-animation = &"all"
+sprite_frames = ExtResource("2_kfe3d")
+animation = &"walk"
+frame_progress = 0.14218251
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -46)
 shape = SubResource("CapsuleShape2D_7x5a4")
 one_way_collision = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="MobSquashed" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_ph1f6")
+
+[node name="CollectCoins" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_wa6cj")
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_mpawu")
+volume_db = -10.215

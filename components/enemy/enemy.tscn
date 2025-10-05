@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dk0xon0k7ga23"]
+[gd_scene load_steps=11 format=3 uid="uid://dk0xon0k7ga23"]
 
 [ext_resource type="Texture2D" uid="uid://dwhi5vmkbnyk4" path="res://assets/enemy.png" id="1_57cf6"]
 [ext_resource type="Script" uid="uid://d003tgo4vrak8" path="res://components/enemy/enemy.gd" id="1_urf0o"]
+[ext_resource type="AudioStream" uid="uid://b11skrjk0i68a" path="res://assets/audio/SFX/hurt.wav" id="4_xlq87"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5r7qd"]
 atlas = ExtResource("1_57cf6")
@@ -84,5 +85,10 @@ position = Vector2(0, -106)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(0, 58.5)
 shape = SubResource("RectangleShape2D_cepcq")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("4_xlq87")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

@@ -14,6 +14,7 @@ extends CharacterBody2D
 ## Can the enemy be squashed by the player?
 @export var squashable: bool = true
 
+
 ## The direction the enemy will start moving in.
 @export_enum("Left:0", "Right:1") var start_direction: int = 0
 
@@ -74,4 +75,5 @@ func _on_hitbox_body_entered(body):
 			body.stomp()
 			queue_free()
 		elif player_loses_life:
+			$SFX/PlayerHit.play()
 			Global.lives -= 1

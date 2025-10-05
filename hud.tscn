@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://jt80gv02u4f2"]
+[gd_scene load_steps=21 format=3 uid="uid://jt80gv02u4f2"]
 
 [ext_resource type="Script" uid="uid://bi5370kgl6xcs" path="res://scripts/hud.gd" id="1_8msyy"]
 [ext_resource type="Texture2D" uid="uid://bwt5tfdwi6444" path="res://assets/input-prompts/keyboard_arrow_left.svg" id="2_btdwd"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://cunoxrlkbl8f1" path="res://assets/input-prompts/steamdeck_button_a.svg" id="7_cae44"]
 [ext_resource type="Texture2D" uid="uid://djskjyoqjltro" path="res://assets/input-prompts/keyboard_d.svg" id="7_idqt6"]
 [ext_resource type="Texture2D" uid="uid://vujn5y4v732w" path="res://assets/controls/flatDarkA.png" id="8_me7no"]
+[ext_resource type="Texture2D" uid="uid://bjqboxowe07lw" path="res://assets/items/crystal.png" id="18_pw7dr"]
 
 [sub_resource type="Theme" id="Theme_0yvta"]
 default_font_size = 64
@@ -198,29 +199,34 @@ horizontal_alignment = 1
 
 [node name="CollectedCoins" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 64.0
-offset_top = 126.0
-offset_right = 306.0
-offset_bottom = 214.0
+offset_left = 364.0
+offset_top = 29.0
+offset_right = 606.0
+offset_bottom = 117.0
 theme_override_font_sizes/font_size = 64
-text = "Coins: 0"
+text = "0"
 
 [node name="TimeLeft" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
-offset_left = 64.0
-offset_top = 40.0
-offset_right = 306.0
-offset_bottom = 128.0
+anchors_preset = -1
+anchor_left = 0.887
+anchor_top = 0.026
+anchor_right = 0.887
+anchor_bottom = 0.026
+offset_left = -35.04004
+offset_top = 9.92
+offset_right = 206.95996
+offset_bottom = 97.92
 theme_override_font_sizes/font_size = 64
 text = "0"
 
 [node name="Lives" type="TextureRect" parent="."]
 unique_name_in_owner = true
-offset_left = 60.0
-offset_top = 220.0
-offset_right = 124.0
-offset_bottom = 284.0
+offset_left = 48.0
+offset_top = 42.0
+offset_right = 240.0
+offset_bottom = 106.0
 texture = ExtResource("2_yyptq")
 expand_mode = 1
 stretch_mode = 1
@@ -257,3 +263,22 @@ texture_pressed = ExtResource("8_me7no")
 passby_press = true
 action = "player_1_jump"
 visibility_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 0, 1)
+offset_left = 251.0
+offset_top = 11.0
+offset_right = 379.0
+offset_bottom = 139.0
+texture = ExtResource("18_pw7dr")
+
+[node name="QuitButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 704.0
+offset_top = 576.0
+offset_right = 1218.0
+offset_bottom = 665.0
+theme_override_font_sizes/font_size = 50
+text = "QUIT THE GAME"
+
+[connection signal="pressed" from="QuitButton" to="." method="_quit_game"]

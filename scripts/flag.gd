@@ -43,4 +43,5 @@ func _ready():
 func _on_body_entered(_body):
 	if flag_position == FlagPosition.DOWN:
 		flag_position = FlagPosition.UP
+		$"Node2D/Flag sound".play()
 		Global.raise_flag(self)

@@ -34,7 +34,7 @@ const _PLAYER_ACTIONS = {
 
 ## How high does your character jump? Note that the gravity will
 ## be influenced by the [member GameLogic.gravity].
-@export_range(-1000, 1000, 10, "suffix:px/s") var jump_velocity = -880.0
+@export_range(-4000, 1000, 10, "suffix:px/s") var jump_velocity = -880.0
 
 ## How much should the character's jump be reduced if you let go of the jump
 ## key before the top of the jump? [code]0[/code] means “not at all”;
@@ -96,6 +96,7 @@ func _ready():
 	else:
 		Global.gravity_changed.connect(_on_gravity_changed)
 		Global.lives_changed.connect(_on_lives_changed)
+		Global.coin_collected.connect(_play_collect_coins_sound)
 
 	original_position = position
 	_set_speed(speed)
@@ -115,15 +116,18 @@ func _jump():
 		_double_jump_particles.emitting = true
 	elif double_jump:
 		double_jump_armed = true
+	$SFX/JumpSound.play()
 
 
 func stomp():
+	$SFX/MobSquashed.play()
 	double_jump_armed = false
 	_jump()
 
 
 func _player_just_pressed(action):
-	if player == Global.Player.BOTH:
+	if player == Global.Player.BOTH:_double_jump_particles.emitting = true
+	elif double_jump:
 		return (
 			Input.is_action_just_pressed(_PLAYER_ACTIONS[Global.Player.ONE][action])
 			or Input.is_action_just_pressed(_PLAYER_ACTIONS[Global.Player.TWO][action])
@@ -224,3 +228,5 @@ func reset():
 func _on_lives_changed():
 	if Global.lives > 0:
 		reset()
+func _play_collect_coins_sound():
+	$SFX/CollectCoins.play()
