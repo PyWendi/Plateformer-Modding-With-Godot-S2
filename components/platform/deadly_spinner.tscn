@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbecyg6f1khdy"]
+
+[ext_resource type="Script" uid="uid://cuo68pedspbv0" path="res://components/platform/deadly_platform.gd" id="1_lwsh5"]
+[ext_resource type="Texture2D" uid="uid://dqw33avfa0be3" path="res://assets/new sprites/spritesheet-tiles-default.png" id="1_scgmm"]
+[ext_resource type="AudioStream" uid="uid://b11skrjk0i68a" path="res://assets/audio/SFX/hurt.wav" id="3_aw5lk"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lwsh5"]
+atlas = ExtResource("1_scgmm")
+region = Rect2(1024, 960, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aw5lk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lwsh5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bra6d"]
+
+[node name="DeadlySpinner" type="Area2D"]
+script = ExtResource("1_lwsh5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(1.6399996, 1.6399996)
+sprite_frames = SubResource("SpriteFrames_aw5lk")
+frame_progress = 0.24534771
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.6919346, 5.6919346)
+shape = SubResource("CircleShape2D_bra6d")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_aw5lk")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

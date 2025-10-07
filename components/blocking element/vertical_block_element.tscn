@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://doillp6f00tw4"]
+
+[ext_resource type="Script" uid="uid://vtycsk8s45hs" path="res://components/blocking element/horizonal_block_element.gd" id="1_6uk6y"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_yksi8"]
+
+[node name="HorizonalBlockElement" type="Area2D"]
+collision_layer = 12
+collision_mask = 0
+script = ExtResource("1_6uk6y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(82, 1)
+rotation = 1.5707964
+scale = Vector2(2.8799987, 17.52)
+shape = SubResource("SegmentShape2D_yksi8")

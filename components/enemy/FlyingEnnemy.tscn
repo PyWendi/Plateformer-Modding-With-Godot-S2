@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=3 uid="uid://bri0c0aybjsre"]
+
+[ext_resource type="Texture2D" uid="uid://bg5x6k6ps17hd" path="res://assets/new sprites/spritesheet-enemies-double.png" id="1_78inl"]
+[ext_resource type="Script" uid="uid://5saa7hjlp0je" path="res://components/enemy/flying.gd" id="1_limoo"]
+[ext_resource type="AudioStream" uid="uid://b11skrjk0i68a" path="res://assets/audio/SFX/hurt.wav" id="3_ceqap"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_limoo"]
+atlas = ExtResource("1_78inl")
+region = Rect2(640, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ceqap"]
+atlas = ExtResource("1_78inl")
+region = Rect2(640, 512, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ioch"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_limoo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ceqap")
+}],
+"loop": true,
+"name": &"Fly",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_78inl"]
+radius = 29.297195
+height = 98.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceqap"]
+size = Vector2(20, 26.20192)
+
+[node name="FlyingEnnemy" type="CharacterBody2D" groups=["fly"]]
+collision_layer = 2
+script = ExtResource("1_limoo")
+speed = 200.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_5ioch")
+animation = &"Fly"
+autoplay = "Fly"
+frame_progress = 0.73436135
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.94206953, 0.91999984)
+shape = SubResource("CapsuleShape2D_78inl")
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+position = Vector2(-50, 0)
+rotation = 1.5707964
+scale = Vector2(1.136, 0.5)
+collision_mask = 4
+collide_with_areas = true
+
+[node name="RightRay" type="RayCast2D" parent="."]
+position = Vector2(50, -1)
+rotation = -1.5707964
+scale = Vector2(0.5, 0.5)
+collision_mask = 4
+collide_with_areas = true
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+position = Vector2(0, -4.499999)
+scale = Vector2(5.1600013, 4.160001)
+shape = SubResource("RectangleShape2D_ceqap")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_ceqap")
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hitbox_body_entered"]

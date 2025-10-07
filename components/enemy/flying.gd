@@ -1,4 +1,4 @@
-class_name FlyingEnnemy
+class_name Enemy
 extends CharacterBody2D
 
 ## How fast does your enemy move?
@@ -23,9 +23,9 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var direction: int
 
-@onready var _sprite := %AnimatedSprite2D
-@onready var _left_ray := %LeftRay
-@onready var _right_ray := %RightRay
+@onready var _sprite := $AnimatedSprite2D
+@onready var _left_ray := $LeftRay
+@onready var _right_ray := $RightRay
 
 
 func _set_speed(new_speed):
@@ -44,29 +44,23 @@ func _ready():
 	direction = -1 if start_direction == 0 else 1
 
 
-func _physics_process(delta):
-	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-
-	if not fall_off_edge and (_left_ray.is_colliding() or _right_ray.is_colliding()):
-		if direction == -1 and not _left_ray.is_colliding():
+func _physics_process(_delta):
+	if _left_ray.is_colliding() or _right_ray.is_colliding():
+		if direction == -1 and _left_ray.is_colliding():
 			direction = 1
-		elif direction == 1 and not _right_ray.is_colliding():
+		elif direction == 1 and _right_ray.is_colliding():
 			direction = -1
 
 	velocity.x = direction * speed
 
-	_sprite.flip_h = velocity.x < 0
+	_sprite.flip_h = velocity.x > 0
 
 	move_and_slide()
-
-	if velocity.x == 0 and is_on_floor():
-		direction *= -1
 
 
 func _on_gravity_changed(new_gravity):
 	gravity = new_gravity
+
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("players"):
