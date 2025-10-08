@@ -2,19 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://bwqhhtm1mdivu" path="res://assets/flag.png" id="1_agjbr"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aie4a"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gurf"]
 atlas = ExtResource("1_agjbr")
-region = Rect2(444, 0, 128, 128)
+region = Rect2(148, 0, 148, 148)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bkoi4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjs4o"]
 atlas = ExtResource("1_agjbr")
-region = Rect2(296, 0, 128, 128)
+region = Rect2(0, 0, 148, 148)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aie4a")
+"texture": SubResource("AtlasTexture_6gurf")
 }],
 "loop": true,
 "name": &"down",
@@ -22,7 +22,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bkoi4")
+"texture": SubResource("AtlasTexture_pjs4o")
 }],
 "loop": true,
 "name": &"up",

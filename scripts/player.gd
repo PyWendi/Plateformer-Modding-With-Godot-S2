@@ -163,7 +163,7 @@ func _get_player_axis(action_a, action_b):
 	return Input.get_axis(_PLAYER_ACTIONS[player][action_a], _PLAYER_ACTIONS[player][action_b])
 
 
-func _physics_process(delta):
+func _process(delta):
 	# Don't move if there are no lives left.
 	if Global.lives <= 0:
 		return
@@ -217,6 +217,8 @@ func _physics_process(delta):
 	coyote_timer -= delta
 	jump_buffer_timer -= delta
 
+func set_spawn_position(new_position: Vector2):
+	original_position = new_position
 
 func reset():
 	position = original_position

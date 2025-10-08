@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://xgoc4lu5becq"]
+
+[ext_resource type="Script" uid="uid://gd5o50wlb2l7" path="res://scripts/checkpoint_flag.gd" id="1_cq5mi"]
+[ext_resource type="SpriteFrames" uid="uid://b3orjhfv6eeud" path="res://components/flag/flag-spriteframes-green.tres" id="2_cq5mi"]
+[ext_resource type="Texture2D" uid="uid://dqw33avfa0be3" path="res://assets/new sprites/spritesheet-tiles-default.png" id="3_cq5mi"]
+[ext_resource type="AudioStream" uid="uid://divslictrvm3f" path="res://assets/audio/SFX/Checkpoint.wav" id="4_cq5mi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dfps"]
+size = Vector2(64, 128)
+
+[node name="CheckpointFlag" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_cq5mi")
+sprite_frames = ExtResource("2_cq5mi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-32, 32)
+texture = ExtResource("3_cq5mi")
+hframes = 18
+vframes = 18
+frame = 280
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-32, -16)
+scale = Vector2(0.5, 0.625)
+sprite_frames = ExtResource("2_cq5mi")
+animation = &"down"
+frame_progress = 0.83697563
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-32, 0)
+shape = SubResource("RectangleShape2D_3dfps")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Flag sound" type="AudioStreamPlayer2D" parent="Node2D"]
+stream = ExtResource("4_cq5mi")
+volume_db = 8.357
+attenuation = 0.9659363
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

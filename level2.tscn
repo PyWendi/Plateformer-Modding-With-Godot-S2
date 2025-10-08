@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://dyb7d6dpqngqc"]
+[gd_scene load_steps=21 format=4 uid="uid://dyb7d6dpqngqc"]
 
 [ext_resource type="PackedScene" uid="uid://cswheshouik14" path="res://rules_goals/game_logic.tscn" id="1_mw4xc"]
 [ext_resource type="PackedScene" uid="uid://jnrusvm3gric" path="res://spaces/background.tscn" id="2_r8rrl"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dqoudn27h71sj" path="res://components/blocking element/horizonal_block_element.tscn" id="15_lwvnx"]
 [ext_resource type="PackedScene" uid="uid://bri0c0aybjsre" path="res://components/enemy/FlyingEnnemy.tscn" id="16_4ou0f"]
 [ext_resource type="PackedScene" uid="uid://doillp6f00tw4" path="res://components/blocking element/vertical_block_element.tscn" id="19_hp87d"]
+[ext_resource type="PackedScene" uid="uid://xgoc4lu5becq" path="res://components/flag/checkpoint_flag.tscn" id="20_gxpff"]
 
 [node name="Main" type="Node2D"]
 
@@ -212,7 +213,7 @@ position = Vector2(2186, -54)
 collision_mask = 4
 
 [node name="Player" parent="." instance=ExtResource("8_2x2vu")]
-position = Vector2(3453, 150)
+position = Vector2(1224, 1015)
 collision_layer = 1
 collision_mask = 7
 sprite_frames = ExtResource("9_f8ci1")
@@ -273,3 +274,9 @@ position = Vector2(4101, 144)
 
 [node name="HorizonalBlockElement4" parent="InvisbleBlock" instance=ExtResource("19_hp87d")]
 position = Vector2(4101, -497)
+
+[node name="CheckpointFlag" parent="." instance=ExtResource("20_gxpff")]
+position = Vector2(94, 574)
+
+[node name="CheckpointFlag2" parent="." instance=ExtResource("20_gxpff")]
+position = Vector2(2475, 574)
