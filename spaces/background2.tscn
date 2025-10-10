@@ -21,9 +21,9 @@ script = ExtResource("1_gv6sh")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 unique_name_in_owner = true
-scale = Vector2(2.6799994, 3.6400003)
+scale = Vector2(3.0799994, 4.960001)
 motion_scale = Vector2(0, 0)
-motion_mirroring = Vector2(1600, 0)
+motion_mirroring = Vector2(1400, 0)
 
 [node name="ColorRect" type="ColorRect" parent="ParallaxLayer"]
 anchors_preset = 15
@@ -125,6 +125,96 @@ centered = false
 
 [node name="Sprite2D14" type="Sprite2D" parent="ParallaxLayer2"]
 position = Vector2(15184.002, -1872)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D16" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(15248.001, -4592)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D17" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(18840, -4624.0005)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D18" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(16832, -5936)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D19" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(14248.002, -7472.0005)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D20" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(18368, -7720)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D21" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(20736, -8927.999)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D22" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(22360, -7416.001)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D23" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(22784, -8152.001)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D24" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(23672.002, -8824)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D25" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(20352, -8336)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D26" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(20496, -7256.001)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D27" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(19528, -6504)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D28" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(22440.002, -6360)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D29" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(21976, -5224)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_yctkk")
+centered = false
+
+[node name="Sprite2D30" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(22304, -4240)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_yctkk")
 centered = false

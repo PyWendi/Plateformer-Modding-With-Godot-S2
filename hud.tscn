@@ -96,6 +96,11 @@ layout_mode = 2
 texture = ExtResource("3_dm1pp")
 stretch_mode = 5
 
+[node name="Label" type="Label" parent="Start/GridContainer/PlayerOne/PlayerOneKeyboard"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "/ Space bar"
+
 [node name="Right" type="TextureRect" parent="Start/GridContainer/PlayerOne/PlayerOneKeyboard"]
 layout_mode = 2
 texture = ExtResource("4_pk5l0")
