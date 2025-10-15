@@ -63,6 +63,9 @@ var jump_buffer_timer: float = 0
 # If true, the player is already jumping and can perform a double-jump
 var double_jump_armed: bool = false
 
+# To allow or block user movement
+var can_move:bool = true
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var original_position: Vector2
@@ -168,6 +171,9 @@ func _process(delta):
 	# Don't move if there are no lives left.
 	if Global.lives <= 0:
 		return
+
+	if not can_move:
+		return 
 
 	# Handle jump
 	if is_on_floor():

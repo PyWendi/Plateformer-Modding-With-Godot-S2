@@ -1,47 +1,52 @@
-[gd_scene load_steps=3 format=3 uid="uid://cey571lt0ga72"]
+[gd_scene load_steps=5 format=3 uid="uid://b3neelei1duni"]
 
-[ext_resource type="Texture2D" uid="uid://dqw33avfa0be3" path="res://assets/new sprites/spritesheet-tiles-default.png" id="1_bocws"]
+[ext_resource type="Script" uid="uid://4okyw7ub7myn" path="res://scripts/hints.gd" id="1_5ukcr"]
+[ext_resource type="Texture2D" uid="uid://dqw33avfa0be3" path="res://assets/new sprites/spritesheet-tiles-default.png" id="1_37kl0"]
+[ext_resource type="Theme" uid="uid://wpnq5i1a0s7o" path="res://theme/UI theme.tres" id="2_0cgud"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ukcr"]
-size = Vector2(90, 81)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37kl0"]
+size = Vector2(13.026051, 55.346054)
 
-[node name="Hints" type="Node2D"]
+[node name="Hints" type="Control"]
+z_index = -1
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5ukcr")
+
+[node name="Panel" type="Panel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_right = 576.0
+offset_bottom = 272.0
+scale = Vector2(0.74167615, 0.74167615)
+theme = ExtResource("2_0cgud")
+
+[node name="HintText" type="Label" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_top = 115.0
+offset_right = 576.0
+offset_bottom = 157.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+paragraph_separator = "|"
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Area2D"]
-texture_filter = 1
-texture = ExtResource("1_bocws")
+position = Vector2(216, 288)
+scale = Vector2(1.778863, 1.778863)
+texture = ExtResource("1_37kl0")
 hframes = 18
 vframes = 18
 frame = 244
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, 0.5)
-shape = SubResource("RectangleShape2D_5ukcr")
+position = Vector2(216, 290.36258)
+scale = Vector2(9.826463, 2.1090057)
+shape = SubResource("RectangleShape2D_37kl0")
 
-[node name="Label" type="Label" parent="."]
-texture_filter = 1
-offset_left = -160.0
-offset_top = -152.0
-offset_right = -11.0
-offset_bottom = -103.0
-scale = Vector2(2.3517482, 2.2249534)
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 16
-text = "dfsdfdsfsdfsdfd"
-horizontal_alignment = 1
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="Panel" parent="."]
-visible = false
-z_index = -1
-offset_left = -200.0
-offset_top = -184.0
-offset_right = -51.0
-offset_bottom = -135.0
-scale = Vector2(2.827297, 2.8704448)
-tooltip_text = "Hello owlrd"
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

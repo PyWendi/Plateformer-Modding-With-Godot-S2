@@ -34,6 +34,10 @@ extends Node
 
 @export_group("World Properties")
 
+# To check if the player have done the entrance animation
+var has_entrance_animate:bool = false
+@onready var animator := %Cinematics
+
 # Keep default the same as ProjectSettings.get_setting("physics/2d/default_gravity")
 ## This is the gravity of the world. In pixels per second squared.
 @export_range(-2000.0, 2000.0, 0.1, "suffix:px/s²") var gravity: float = 980.0
@@ -104,3 +108,16 @@ func _check_win_conditions(flag: Flag):
 		return false
 
 	return true
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if not has_entrance_animate:
+		if body.is_in_group("players"):
+			body.can_move = false
+			body._sprite.play("idle")
+			
+			animator.play("castle_entrance")
+			await animator.animation_finished
+			has_entrance_animate = true
+			
+			body.can_move = true

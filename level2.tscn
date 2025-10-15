@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dyb7d6dpqngqc"]
+[gd_scene load_steps=29 format=4 uid="uid://dyb7d6dpqngqc"]
 
 [ext_resource type="PackedScene" uid="uid://cswheshouik14" path="res://rules_goals/game_logic.tscn" id="1_mw4xc"]
 [ext_resource type="PackedScene" uid="uid://jnrusvm3gric" path="res://spaces/background.tscn" id="2_r8rrl"]
@@ -23,6 +23,47 @@
 [ext_resource type="PackedScene" uid="uid://xgoc4lu5becq" path="res://components/flag/checkpoint_flag.tscn" id="20_gxpff"]
 [ext_resource type="PackedScene" uid="uid://3pojo66ft4kn" path="res://components/key and door/key.tscn" id="22_f8ci1"]
 [ext_resource type="PackedScene" uid="uid://78t1h4fi1eoc" path="res://components/key and door/door.tscn" id="23_iakae"]
+[ext_resource type="PackedScene" uid="uid://b3neelei1duni" path="res://components/flag/hints.tscn" id="24_7mylh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mylh"]
+size = Vector2(37, 512)
+
+[sub_resource type="Animation" id="Animation_7mylh"]
+resource_name = "castle_entrance"
+length = 12.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player/Camera2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 5, 7.9789996, 8.335873, 9.577831, 9.987912, 12),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(720, 16), Vector2(5752, 328), Vector2(5408.0005, -3032), Vector2(10535.999, -5768), Vector2(10743.999, -5768), Vector2(10839.999, -9288), Vector2(10839.999, -9288), Vector2(0, 16)]
+}
+
+[sub_resource type="Animation" id="Animation_3k4dh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Player/Camera2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3k4dh"]
+_data = {
+&"RESET": SubResource("Animation_3k4dh"),
+&"castle_entrance": SubResource("Animation_7mylh")
+}
 
 [node name="Main" type="Node2D"]
 
@@ -46,7 +87,6 @@ tile_map_data = PackedByteArray("AAAAAAUAAAACAAAAAAABAAUAAAACAAAAAAADAAUAAAACAAA
 [node name="Main theme music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_ggudo")
 volume_db = -10.215
-autoplay = true
 
 [node name="Coins" type="Node2D" parent="."]
 
@@ -397,7 +437,7 @@ can_fall = true
 
 [node name="Platform13" parent="Platforms" instance=ExtResource("7_gxpff")]
 position = Vector2(15048, -2432)
-can_fall = false
+can_fall = true
 
 [node name="Platform14" parent="Platforms" instance=ExtResource("7_gxpff")]
 position = Vector2(14432, -2688)
@@ -406,7 +446,7 @@ can_fall = true
 
 [node name="Platform15" parent="Platforms" instance=ExtResource("7_gxpff")]
 position = Vector2(13792, -2432)
-can_fall = false
+can_fall = true
 
 [node name="Platform16" parent="Platforms" instance=ExtResource("7_gxpff")]
 position = Vector2(13048, -2688)
@@ -744,7 +784,7 @@ position = Vector2(14872, -3024)
 position = Vector2(20856, -808)
 
 [node name="Player" parent="." instance=ExtResource("8_2x2vu")]
-position = Vector2(392, 624)
+position = Vector2(752, 624)
 collision_layer = 1
 collision_mask = 7
 sprite_frames = ExtResource("9_f8ci1")
@@ -796,3 +836,61 @@ scale = Vector2(1.9486152, 1.9486152)
 [node name="Door2" parent="KeysAndDoors" instance=ExtResource("23_iakae")]
 position = Vector2(18944.002, -3584)
 scale = Vector2(1.9486152, 1.9486152)
+
+[node name="Hints" type="Node2D" parent="."]
+
+[node name="Hints" parent="Hints" instance=ExtResource("24_7mylh")]
+offset_left = 1152.0
+offset_top = 199.99998
+offset_right = 1152.0
+offset_bottom = 199.99998
+scale = Vector2(1.4419827, 1.2763367)
+hint_text = "Hold the jump button to jump higher."
+
+[node name="Hints3" parent="Hints" instance=ExtResource("24_7mylh")]
+offset_left = 2560.0002
+offset_top = -183.99998
+offset_right = 2560.0002
+offset_bottom = -183.99998
+scale = Vector2(1.4419827, 1.2763367)
+hint_text = "Smash the monsters from above | to destroy them and avoid |being hit by them or you| will lose a heart."
+
+[node name="Hints2" parent="Hints" instance=ExtResource("24_7mylh")]
+offset_left = 5712.0005
+offset_top = -576.0
+offset_right = 5712.0005
+offset_bottom = -576.0
+scale = Vector2(1.4419827, 1.2763367)
+hint_text = "Smash the flies from above to destroy| them and take the key to open| the castle door. Also note that| these kinds of platforms make| you fall after a few seconds."
+
+[node name="Hints4" parent="Hints" instance=ExtResource("24_7mylh")]
+offset_left = 12392.0
+offset_top = -312.0
+offset_right = 12392.0
+offset_bottom = -312.0
+scale = Vector2(1.4419827, 1.2763367)
+hint_text = "Use the key to open the door| and reach for the checkpoint."
+
+[node name="Hints5" parent="Hints" instance=ExtResource("24_7mylh")]
+offset_left = 13880.001
+offset_top = -439.99997
+offset_right = 13880.001
+offset_bottom = -439.99997
+scale = Vector2(1.4419827, 1.2763367)
+hint_text = "Now your real journey can| begin, watch out for the deadly cogs| located throughout the castle.| Raise the flag to the| top of the castle to finish the level."
+
+[node name="Cinematics" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Cinematics"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cinematics/Area2D"]
+position = Vector2(14464, -256)
+shape = SubResource("RectangleShape2D_7mylh")
+
+[node name="Cinematics" type="AnimationPlayer" parent="Cinematics"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_3k4dh")
+}
+
+[connection signal="body_entered" from="Cinematics/Area2D" to="GameLogic" method="_on_area_2d_body_entered"]

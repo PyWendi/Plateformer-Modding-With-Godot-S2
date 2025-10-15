@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://wpnq5i1a0s7o"]
+
+[ext_resource type="Texture2D" uid="uid://bnyajiug6j6dg" path="res://assets/new sprites/UiCozyFree.png" id="1_h24o8"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_53a8x"]
+texture = ExtResource("1_h24o8")
+texture_margin_left = 37.762905
+texture_margin_top = 9.588323
+texture_margin_right = 37.487965
+texture_margin_bottom = 10.71958
+region_rect = Rect2(164, 167, 47, 80)
+
+[resource]
+Panel/styles/panel = SubResource("StyleBoxTexture_53a8x")
