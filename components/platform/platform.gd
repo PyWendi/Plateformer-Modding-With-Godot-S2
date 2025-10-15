@@ -12,10 +12,20 @@ const SPRITE: Texture2D = preload("res://assets/tiles-b.png")
 ## Can you jump through the bottom of the platform?
 @export var one_way: bool = false:
 	set = _set_one_way
+	
+@export var can_fall:bool = false
 
 ## Number of seconds after touching the platform for it to fall.
 ## Negative values won't fall.
 @export var fall_time: float = -1
+
+# allow collision to be modified without having error from animator saying defered
+# call on the collider active state is needed
+@onready var platform_collider:CollisionShape2D = %CollisionShape2D
+@onready var can_fall_again: bool = true
+
+@export_range(1, 10, 1, "suffix:seconds") var before_opacity_timer: float = 3.0
+@export_range(1, 10, 1., "suffix:seconds") var after_opacity_timer: float = 2.0
 
 var fall_timer: Timer
 
@@ -74,6 +84,7 @@ func _recreate_sprites():
 
 
 func _ready():
+	platform_collider.disabled = false
 	_recreate_sprites()
 
 	fall_timer = Timer.new()
@@ -85,11 +96,26 @@ func _ready():
 func _on_area_2d_body_entered(body):
 	if not body.is_in_group("players"):
 		return
-	if fall_time > 0:
-		fall_timer.start(fall_time)
-		_animation_player.play("shake")
-	elif fall_time == 0:
-		_rigid_body.call_deferred("set_freeze_enabled", false)
+	
+	if can_fall:
+		if can_fall_again:
+			can_fall_again = false
+			_animation_player.play("invisible")
+			await get_tree().create_timer(before_opacity_timer).timeout
+			# Set defered is being used because the animationplayer node
+			# complain about the disable attribute to only modified by using call or 
+			# setting defered function to change it's state
+			platform_collider.set_deferred("disabled", true)
+			await get_tree().create_timer(after_opacity_timer).timeout
+			platform_collider.set_deferred("disabled", false)
+			can_fall_again = true
+		
+	else :
+		if fall_time > 0:
+			fall_timer.start(fall_time)
+			_animation_player.play("shake")
+		elif fall_time == 0:
+			_rigid_body.call_deferred("set_freeze_enabled", false)
 
 
 func _fall():

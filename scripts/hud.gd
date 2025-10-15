@@ -8,6 +8,7 @@ extends CanvasLayer
 
 @onready var quit_button = %QuitButton
 
+
 func _process(_delta):
 	%TimeLeft.text = "%.1f" % Global.timer.time_left
 
@@ -16,8 +17,11 @@ func _ready():
 	set_process(false)
 	set_physics_process(false)
 	quit_button.hide()
-	
+	%Keys.visible = false
 	Global.lives_changed.connect(_on_lives_changed)
+	# Check the change in the keys
+	Global.keys_collected.connect(_keys_collected)
+	Global.keys_used.connect(_keys_used)
 
 	if Engine.is_editor_hint():
 		return
@@ -81,6 +85,12 @@ func set_lives(lives: int):
 func _on_game_ended(ending: Global.Endings):
 	ending_labels[ending].visible = true
 	quit_button.show()
+
+func _keys_collected():
+	%Keys.visible = true
+
+func _keys_used():
+	%Keys.visible = false
 
 func _quit_game():
 	get_tree().quit()

@@ -32,6 +32,7 @@ window/stretch/mode="canvas_items"
 
 players=""
 fly=""
+Key="The key to open the door"
 
 [input]
 

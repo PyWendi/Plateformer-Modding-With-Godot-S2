@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://dhcpt1kt8cs0g"]
+[gd_scene load_steps=19 format=4 uid="uid://dhcpt1kt8cs0g"]
 
 [ext_resource type="PackedScene" uid="uid://8st4scqt06l8" path="res://components/player/player.tscn" id="2_7yl00"]
 [ext_resource type="PackedScene" uid="uid://jnrusvm3gric" path="res://spaces/background.tscn" id="2_tb5a2"]
@@ -16,6 +16,8 @@
 [ext_resource type="AudioStream" uid="uid://byc4vldybfmc7" path="res://assets/audio/music theme/Grand Dark Waltz Allegretto.mp3" id="14_w48qg"]
 [ext_resource type="PackedScene" uid="uid://dqoudn27h71sj" path="res://components/blocking element/horizonal_block_element.tscn" id="15_vivmo"]
 [ext_resource type="PackedScene" uid="uid://bri0c0aybjsre" path="res://components/enemy/FlyingEnnemy.tscn" id="16_2cqfq"]
+[ext_resource type="PackedScene" uid="uid://3pojo66ft4kn" path="res://components/key and door/key.tscn" id="17_yaehf"]
+[ext_resource type="PackedScene" uid="uid://78t1h4fi1eoc" path="res://components/key and door/door.tscn" id="18_074og"]
 
 [node name="Main" type="Node2D"]
 
@@ -174,53 +176,63 @@ position = Vector2(1920, -64)
 [node name="Platform" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(960, 320)
 width = 2
+can_fall = false
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(-1472, 0)
 width = 2
 one_way = true
+can_fall = true
 fall_time = 2.0
 
 [node name="Platform5" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(-1152, 0)
 width = 2
 one_way = true
+can_fall = true
 fall_time = 2.0
 
 [node name="Platform6" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(-832, 0)
 width = 2
 one_way = true
+can_fall = true
 fall_time = 2.0
 
 [node name="Platform7" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(-512, 0)
 width = 2
 one_way = true
+can_fall = true
 fall_time = 2.0
 
 [node name="Platform8" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(-192, 0)
 width = 2
 one_way = true
+can_fall = false
 fall_time = 2.0
 
 [node name="Platform9" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(128, 0)
 width = 2
 one_way = true
+can_fall = false
 fall_time = 2.0
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(1216, -64)
 width = 2
+can_fall = false
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("4_gd51l")]
 position = Vector2(1472, 320)
 width = 2
+can_fall = false
 
 [node name="Player" parent="." instance=ExtResource("2_7yl00")]
-position = Vector2(320, 252)
+z_index = 10
+position = Vector2(767, 622)
 collision_layer = 1
 collision_mask = 7
 sprite_frames = ExtResource("9_ycdy4")
@@ -258,7 +270,6 @@ script = ExtResource("13_0d2mj")
 [node name="Main theme music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_w48qg")
 volume_db = -2.786
-autoplay = true
 
 [node name="block" type="Node2D" parent="."]
 
@@ -274,3 +285,12 @@ scale = Vector2(1, 2.5599995)
 
 [node name="FlyingEnnemy" parent="Flyiing ennemy" instance=ExtResource("16_2cqfq")]
 position = Vector2(594, -320)
+
+[node name="Key" parent="." instance=ExtResource("17_yaehf")]
+position = Vector2(538, 574)
+
+[node name="DoorSystem" type="Node2D" parent="."]
+
+[node name="Door" parent="DoorSystem" instance=ExtResource("18_074og")]
+position = Vector2(1200, 455.99994)
+scale = Vector2(2.9199986, 2.9199986)

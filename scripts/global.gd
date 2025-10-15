@@ -6,6 +6,8 @@ signal flag_raised(flag: Flag)
 signal lives_changed
 signal game_ended(ending: Endings)
 signal game_started
+signal keys_collected
+signal keys_used
 
 ## Emitted by [GameLogic] when the world's gravitational force is changed.
 @warning_ignore("unused_signal")
@@ -26,6 +28,8 @@ var coins: int = 0
 var lives: int = 0:
 	set = _set_lives
 
+## Stores the collected keys.
+var keys: int = 0
 
 func collect_coin():
 	coins += 1
@@ -75,3 +79,15 @@ func _on_game_start():
 	# Start the timer if it has been set up.
 	if timer != null:
 		timer.paused = false
+
+# Key collected
+func _key_collected():
+	print("key collected")
+	keys += 1
+	keys_collected.emit()
+	print("key : "+str(keys))
+	
+func _key_used():
+	keys -= 0 if keys <=0 else 1
+	keys_used.emit()
+	

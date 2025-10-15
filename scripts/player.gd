@@ -97,6 +97,7 @@ func _ready():
 		Global.gravity_changed.connect(_on_gravity_changed)
 		Global.lives_changed.connect(_on_lives_changed)
 		Global.coin_collected.connect(_play_collect_coins_sound)
+		Global.keys_collected.connect(_play_collect_key_sound)
 
 	original_position = position
 	_set_speed(speed)
@@ -232,3 +233,7 @@ func _on_lives_changed():
 		reset()
 func _play_collect_coins_sound():
 	$SFX/CollectCoins.play()
+	
+func _play_collect_key_sound():
+	$SFX/KeyCollected.play()
+	

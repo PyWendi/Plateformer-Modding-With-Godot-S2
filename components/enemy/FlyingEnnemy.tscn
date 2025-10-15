@@ -42,7 +42,8 @@ speed = 200.0
 sprite_frames = SubResource("SpriteFrames_5ioch")
 animation = &"Fly"
 autoplay = "Fly"
-frame_progress = 0.73436135
+frame = 1
+frame_progress = 0.07064763
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(0.94206953, 0.91999984)
@@ -66,7 +67,7 @@ collide_with_areas = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
 position = Vector2(0, -4.499999)
-scale = Vector2(5.1600013, 4.160001)
+scale = Vector2(3.680001, 4.160001)
 shape = SubResource("RectangleShape2D_ceqap")
 
 [node name="SFX" type="Node2D" parent="."]

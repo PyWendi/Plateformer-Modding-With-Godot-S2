@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://coq6d3u6wnvs2"]
+[gd_scene load_steps=8 format=3 uid="uid://coq6d3u6wnvs2"]
 
 [ext_resource type="Script" uid="uid://dilh5jyuklov6" path="res://components/platform/platform.gd" id="1_dpc6h"]
 
@@ -24,13 +24,47 @@ tracks/0/keys = {
 "values": [Vector2(0, 0), Vector2(5, 4), Vector2(-2, 4), Vector2(-5, -4), Vector2(4, 5), Vector2(-4, 4), Vector2(2, -3), Vector2(-1, 0), Vector2(5, 2), Vector2(3, -2), Vector2(2, -3)]
 }
 
+[sub_resource type="Animation" id="Animation_nc71g"]
+resource_name = "invisible"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5, 3, 4.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.5411765), Color(1, 1, 1, 1), Color(1, 1, 1, 0.5411765), Color(1, 1, 1, 1), Color(1, 1, 1, 0.5411765), Color(1, 1, 1, 0.29803923), Color(1, 1, 1, 0.29803923), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_m2s26"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cwxfq"]
 _data = {
+&"RESET": SubResource("Animation_m2s26"),
+&"invisible": SubResource("Animation_nc71g"),
 &"shake": SubResource("Animation_6232f")
 }
 
 [node name="Platform" type="Node2D"]
 script = ExtResource("1_dpc6h")
+can_fall = null
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 unique_name_in_owner = true
@@ -49,6 +83,7 @@ shape = SubResource("RectangleShape2D_i4vtk")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_o2vn2")
+disabled = true
 
 [node name="Sprites" type="Node2D" parent="RigidBody2D"]
 unique_name_in_owner = true
