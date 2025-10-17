@@ -4,6 +4,7 @@ extends CharacterBody2D
 ## How fast does your enemy move?
 @export_range(0, 1000, 10, "suffix:px/s") var speed: float = 100.0:
 	set = _set_speed
+var initial_speed: float = 0
 
 ## Does the enemy fall off edges?
 @export var fall_off_edge: bool = false
@@ -14,6 +15,12 @@ extends CharacterBody2D
 ## Can the enemy be squashed by the player?
 @export var squashable: bool = true
 
+## Can the enemy be squashed but not kill the player?
+@export var squashable_stomp: bool = false
+
+# can double speed?
+@export var double_speed: bool = false
+var has_speed_doubled := false
 
 ## The direction the enemy will start moving in.
 @export_enum("Left:0", "Right:1") var start_direction: int = 0
@@ -36,11 +43,12 @@ func _set_speed(new_speed):
 		_sprite.speed_scale = 0
 	else:
 		_sprite.speed_scale = speed / 100
+		initial_speed = speed
 
 
 func _ready():
 	Global.gravity_changed.connect(_on_gravity_changed)
-
+	initial_speed = speed
 	direction = -1 if start_direction == 0 else 1
 
 
@@ -66,7 +74,15 @@ func _on_hitbox_body_entered(body):
 	if body.is_in_group("players"):
 		if squashable and body.velocity.y > 0 and body.position.y < position.y:
 			body.stomp()
-			queue_free()
+			if not squashable_stomp:
+				#_sprite.play("hit")
+				#speed = 0
+				queue_free()
+			else :
+				if not has_speed_doubled and double_speed:
+					speed *= 2
+					has_speed_doubled = true
 		elif player_loses_life:
-			$SFX/PlayerHit.play()
+			if Global.lives > 0:
+				$SFX/PlayerHit.play()
 			Global.lives -= 1

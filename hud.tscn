@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://jt80gv02u4f2"]
+[gd_scene load_steps=23 format=3 uid="uid://jt80gv02u4f2"]
 
 [ext_resource type="Script" uid="uid://bi5370kgl6xcs" path="res://scripts/hud.gd" id="1_8msyy"]
 [ext_resource type="Texture2D" uid="uid://bwt5tfdwi6444" path="res://assets/input-prompts/keyboard_arrow_left.svg" id="2_btdwd"]
@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://djskjyoqjltro" path="res://assets/input-prompts/keyboard_d.svg" id="7_idqt6"]
 [ext_resource type="Texture2D" uid="uid://vujn5y4v732w" path="res://assets/controls/flatDarkA.png" id="8_me7no"]
 [ext_resource type="Texture2D" uid="uid://bjqboxowe07lw" path="res://assets/items/crystal.png" id="18_pw7dr"]
+[ext_resource type="Theme" uid="uid://wpnq5i1a0s7o" path="res://theme/UI theme.tres" id="19_5kc73"]
 [ext_resource type="Texture2D" uid="uid://dqw33avfa0be3" path="res://assets/new sprites/spritesheet-tiles-default.png" id="19_ap7yk"]
 
 [sub_resource type="Theme" id="Theme_0yvta"]
@@ -282,18 +283,29 @@ offset_right = 379.0
 offset_bottom = 139.0
 texture = ExtResource("18_pw7dr")
 
+[node name="RestartButton" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 704.0
+offset_top = 592.0
+offset_right = 1218.0
+offset_bottom = 681.0
+theme = ExtResource("19_5kc73")
+theme_override_font_sizes/font_size = 50
+text = "RESTART"
+
 [node name="QuitButton" type="Button" parent="."]
 unique_name_in_owner = true
-visible = false
 offset_left = 704.0
-offset_top = 576.0
+offset_top = 720.0
 offset_right = 1218.0
-offset_bottom = 665.0
+offset_bottom = 809.0
+theme = ExtResource("19_5kc73")
 theme_override_font_sizes/font_size = 50
 text = "QUIT THE GAME"
 
 [node name="Keys" type="Control" parent="."]
 unique_name_in_owner = true
+visible = false
 layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
@@ -317,4 +329,5 @@ hframes = 18
 vframes = 18
 frame = 12
 
+[connection signal="pressed" from="RestartButton" to="." method="_restart_game"]
 [connection signal="pressed" from="QuitButton" to="." method="_quit_game"]

@@ -69,6 +69,7 @@ var can_move:bool = true
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var original_position: Vector2
+var initial_position: Vector2
 
 @onready var _sprite: AnimatedSprite2D = %AnimatedSprite2D
 @onready var _initial_sprite_frames: SpriteFrames = %AnimatedSprite2D.sprite_frames
@@ -101,10 +102,13 @@ func _ready():
 		Global.lives_changed.connect(_on_lives_changed)
 		Global.coin_collected.connect(_play_collect_coins_sound)
 		Global.keys_collected.connect(_play_collect_key_sound)
+		#Global.game_restarted.connect(_restart_the_level)
 
 	original_position = position
+	initial_position = position
 	_set_speed(speed)
 	_set_sprite_frames(sprite_frames)
+	can_move = true
 
 
 func _on_gravity_changed(new_gravity):
@@ -243,3 +247,16 @@ func _play_collect_coins_sound():
 func _play_collect_key_sound():
 	$SFX/KeyCollected.play()
 	
+func _stop_move_on_win():
+	await get_tree().create_timer(0.2).timeout
+	can_move = false
+	_sprite.play("idle")
+
+#func _restart_the_level():
+	#position = initial_position
+	#coyote_time = 0
+	#jump_buffer_timer = 0
+	#velocity = Vector2.ZERO
+	#Global.lives = Global.initial_live
+	#Global.coins = 0
+	#Global.keys = 0

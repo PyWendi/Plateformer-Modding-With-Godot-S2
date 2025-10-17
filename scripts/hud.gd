@@ -7,6 +7,7 @@ extends CanvasLayer
 }
 
 @onready var quit_button = %QuitButton
+@onready var restart_button = %RestartButton
 
 
 func _process(_delta):
@@ -16,7 +17,9 @@ func _process(_delta):
 func _ready():
 	set_process(false)
 	set_physics_process(false)
-	quit_button.hide()
+	
+	hide_ending_button()
+	
 	%Keys.visible = false
 	Global.lives_changed.connect(_on_lives_changed)
 	# Check the change in the keys
@@ -33,7 +36,7 @@ func _ready():
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	if DisplayServer.is_touchscreen_available():
 		%Start.hide()
-		quit_button.hide()
+		hide_ending_button()
 		Global.game_started.emit()
 
 
@@ -56,7 +59,8 @@ func _unhandled_input(event):
 		and %Start.is_visible_in_tree()
 	):
 		%Start.hide()
-		quit_button.hide()
+		hide_ending_button()
+		
 		Global.game_started.emit()
 
 
@@ -84,7 +88,7 @@ func set_lives(lives: int):
 
 func _on_game_ended(ending: Global.Endings):
 	ending_labels[ending].visible = true
-	quit_button.show()
+	show_ending_button()
 
 func _keys_collected():
 	%Keys.visible = true
@@ -94,3 +98,15 @@ func _keys_used():
 
 func _quit_game():
 	get_tree().quit()
+	
+func _restart_game():
+	# Trigger the restart button to global script
+	Global._restart_the_game()
+
+func show_ending_button():
+	restart_button.show()
+	quit_button.show()
+
+func hide_ending_button():
+	restart_button.hide()
+	quit_button.hide()

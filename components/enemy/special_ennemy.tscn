@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjgf8dhupvafa"]
+
+[ext_resource type="Script" uid="uid://d003tgo4vrak8" path="res://components/enemy/enemy.gd" id="1_we0ka"]
+[ext_resource type="AudioStream" uid="uid://b11skrjk0i68a" path="res://assets/audio/SFX/hurt.wav" id="3_k367w"]
+[ext_resource type="Texture2D" uid="uid://de3owpoc205t0" path="res://assets/player-red.png" id="3_koglh"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_we0ka"]
+atlas = ExtResource("3_koglh")
+region = Rect2(296, 296, 148, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k367w"]
+atlas = ExtResource("3_koglh")
+region = Rect2(148, 0, 148, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2s41x"]
+atlas = ExtResource("3_koglh")
+region = Rect2(296, 0, 148, 148)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nlyyt"]
+atlas = ExtResource("3_koglh")
+region = Rect2(444, 0, 148, 148)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2xpc5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_we0ka")
+}],
+"loop": true,
+"name": &"hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k367w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2s41x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nlyyt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kii40"]
+size = Vector2(48, 88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cepcq"]
+size = Vector2(82, 94.5)
+
+[node name="Enemy" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 4
+floor_constant_speed = true
+floor_snap_length = 32.0
+script = ExtResource("1_we0ka")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -64)
+sprite_frames = SubResource("SpriteFrames_2xpc5")
+animation = &"walk"
+autoplay = "walk"
+
+[node name="LeftRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-49, -11)
+collision_mask = 5
+
+[node name="RightRay" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(25, -11)
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-12, -55)
+shape = SubResource("RectangleShape2D_kii40")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -106)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-11, 47.25)
+shape = SubResource("RectangleShape2D_cepcq")
+
+[node name="SFX" type="Node2D" parent="."]
+
+[node name="PlayerHit" type="AudioStreamPlayer2D" parent="SFX"]
+stream = ExtResource("3_k367w")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

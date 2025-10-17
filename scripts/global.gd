@@ -7,6 +7,8 @@ signal lives_changed
 signal game_ended(ending: Endings)
 signal game_started
 signal keys_collected
+#signal game_restarted
+#signal keys_reset
 signal keys_used
 
 ## Emitted by [GameLogic] when the world's gravitational force is changed.
@@ -27,6 +29,7 @@ var coins: int = 0
 ## Stores the number of remaining lives.
 var lives: int = 0:
 	set = _set_lives
+var initial_live:int 
 
 ## Stores the collected keys.
 var keys: int = 0
@@ -65,6 +68,7 @@ func _set_lives(value):
 
 func _ready():
 	# Connect signals to handle game events.
+	initial_live = lives
 	game_ended.connect(_on_game_ended)
 	game_started.connect(_on_game_start)
 
@@ -91,3 +95,6 @@ func _key_used():
 	keys -= 0 if keys <=0 else 1
 	keys_used.emit()
 	
+func _restart_the_game():
+	# Emit to the player to restart
+	get_tree().reload_current_scene()

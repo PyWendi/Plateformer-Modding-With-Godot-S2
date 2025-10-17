@@ -38,6 +38,10 @@ extends Node
 var has_entrance_animate:bool = false
 @onready var animator := %Cinematics
 
+# To control music theme
+@onready var main_theme_sound := $"../Main theme music"
+@onready var winning_music_sound := $"../WinningMusic"
+
 # Keep default the same as ProjectSettings.get_setting("physics/2d/default_gravity")
 ## This is the gravity of the world. In pixels per second squared.
 @export_range(-2000.0, 2000.0, 0.1, "suffix:px/s²") var gravity: float = 980.0
@@ -57,6 +61,10 @@ func _get_all_coins(node, accumulator = []):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	main_theme_sound.play()
+	winning_music_sound.stop()
+	
+	
 	if Engine.is_editor_hint():
 		return
 
@@ -106,6 +114,16 @@ func _check_win_conditions(flag: Flag):
 
 	if win_by_reaching_flag and flag.flag_position == Flag.FlagPosition.DOWN:
 		return false
+
+	# Play the music
+	
+	main_theme_sound.stop()
+	winning_music_sound.play()
+	
+	for node in get_tree().get_nodes_in_group("players"):
+		if node.has_method("_stop_move_on_win"):
+			node._stop_move_on_win()
+			break
 
 	return true
 
